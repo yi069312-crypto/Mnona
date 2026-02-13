@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من حودا لـ منونة ❤️💜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Amiri:ital,wght@1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-purple: #240046;
+            --main-purple: #5a189a;
+            --light-purple: #9d4edd;
+            --neon-purple: #e0aaff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-purple), #10002b);
+            color: white; font-family: 'Cairo', sans-serif;
+            margin: 0; padding: 0; overflow-x: hidden; text-align: center;
+            min-height: 100vh;
+        }
+
+        /* القلوب والنجوم المتساقطة */
+        .falling {
+            position: fixed; top: -50px; pointer-events: none; z-index: 999;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* شاشة القفل */
+        #lock-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--deep-purple); display: flex; justify-content: center;
+            align-items: center; z-index: 10000;
+        }
+        .lock-card {
+            background: rgba(157, 78, 221, 0.1); padding: 40px; border-radius: 30px;
+            border: 2px solid var(--light-purple); backdrop-filter: blur(15px);
+            box-shadow: 0 0 40px var(--main-purple); width: 85%; max-width: 400px;
+        }
+        input {
+            background: rgba(255, 255, 255, 0.9); border: none; padding: 15px;
+            border-radius: 50px; text-align: center; font-size: 1.3rem; margin: 25px 0;
+            width: 90%; font-weight: bold; color: var(--deep-purple); outline: none;
+        }
+        .enter-btn {
+            background: var(--main-purple); color: white; border: none; padding: 15px 50px;
+            border-radius: 50px; font-weight: 900; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 5px 20px var(--light-purple);
+        }
+
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+
+        h1 {
+            font-size: 2.5rem; color: var(--neon-purple);
+            text-shadow: 0 0 20px var(--main-purple); margin-top: 50px;
+        }
+
+        /* مربعات الرسائل */
+        .msg-card {
+            background: rgba(90, 24, 154, 0.2);
+            margin: 30px 0; padding: 25px; border-radius: 20px;
+            border-right: 5px solid var(--light-purple);
+            border-left: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: right; line-height: 1.8; font-size: 1.2rem;
+            opacity: 0; transform: translateY(30px); transition: 1s ease;
+        }
+        .msg-card.visible { opacity: 1; transform: translateY(0); }
+        .highlight { color: var(--neon-purple); font-weight: bold; }
+
+        /* زرار ادخلي قلبي */
+        .heart-btn {
+            background: linear-gradient(45deg, var(--main-purple), var(--light-purple));
+            color: white; border: none; padding: 25px; border-radius: 20px;
+            font-size: 1.5rem; font-weight: 900; cursor: pointer; width: 100%;
+            box-shadow: 0 0 30px var(--main-purple); margin: 60px 0;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); box-shadow: 0 0 50px var(--light-purple); }
+            100% { transform: scale(1); }
+        }
+
+        #final-msg {
+            display: none; padding: 40px 20px;
+            background: rgba(255,255,255,0.05); border-radius: 30px; margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body onload="initFallingItems()">
+
+    <audio id="bgMusic" src="https://files.catbox.moe/acvd59.mp3"></audio>
+    <audio id="heartMusic" src="https://files.catbox.moe/9hm78n.mp3"></audio>
+
+    <div id="lock-screen">
+        <div class="lock-card">
+            <h2 style="color: var(--neon-purple);">عالم حودا & منونة 💜</h2>
+            <p>اكتبي تاريخنا السري..</p>
+            <input type="text" id="passInput" placeholder=".........">
+            <br>
+            <button class="enter-btn" onclick="checkPass()">ادخلي لقلبي ✨</button>
+        </div>
+    </div>
+
+    <div id="main-content" style="display:none;">
+        <div class="container">
+            <h1>كل فلانتين وانتي منونتي 💜</h1>
+
+            <div class="msg-card">
+                علشان <span class="highlight">البنفسجى</span> لونك المفضل حبيت الفلانتين معاكى يبقى كله بنفسجى يروح الروح 😍💜💜💜💜
+            </div>
+
+            <div class="msg-card">
+                منونتى🥹💜🫀
+                كل عيد وانتى عيدى كل عيد حب وانتى حبيبتى وبنتى وصحبتى وكل دنيتى واغلى حاجة ف حياتى واللى عايش علشانك أصلا..
+            </div>
+
+            <div class="msg-card">
+                بجد بتمنى من ربنا يجمعنا ف بيت واحد ف أسرع وقت ف الحلال ويرزقنا بكتكوت صغير من ريحتك يهون عليا اللى شوفته ف الدنيا.. انتي مهونة عليا تعب الدنيا كلها يا ست البنات 🫂🫅🏻
+            </div>
+
+            <div class="msg-card">
+                يمكن الدنيا كلها تبقى صعبة.. بس وجودك فيها بيخليني <span class="highlight">أقوى وأهدى وأطمن</span> 💜
+            </div>
+
+            <div class="msg-card">
+                إنتِ مش بس حب في حياتي لا إنتِ السبب إني أقدر أكمل وأحلم، وأصدق إن الجاي أحلى ✨ ضحكتك بتداوي قلبي وكلامك بيرتب روحي..
+            </div>
+
+            <div class="msg-card">
+                لو الفرح له اسم… فهو عيونك😍 ولو العمر له معنى… فهو وإنتِ فيه🫅🏻
+                كل عيد حب وإحنا مع بعض يا أجمل حاجة حصلتلي🥺💜
+            </div>
+
+            <div class="msg-card" style="text-align: center; border-right: none; border-top: 2px solid var(--light-purple);">
+                <span style="font-size: 1.5rem;">بحبك حب يخليكي تعيطي من كتر الفرح 💜</span><br>
+                <span class="highlight">بحبك يا كل حياتى يا روح قلب حودا🫀 💜</span>
+            </div>
+
+            <button class="heart-btn" onclick="startFinalSurprise()">🌚 ادخلي قلبي بسرعه</button>
+
+            <div id="final-msg">
+                <h2 style="font-size: 2rem; color: var(--neon-purple);">أنا بعشق أمك 🥹💜🫂</h2>
+                <p>إنتي الأمان، إنتي الحياة، إنتي منونة حودا للأبد..</p>
+            </div>
+
+            <div style="font-size: 3rem; margin-bottom: 50px;">👑💜</div>
+        </div>
+    </div>
+
+    <script>
+        function checkPass() {
+            // الباسورد المطلوب للدخول
+            if(document.getElementById('passInput').value === "31122003") {
+                document.getElementById('lock-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.getElementById('bgMusic').play().catch(e => console.log("Music blocked"));
+                setupScroll();
+            } else {
+                alert("الباسورد غلط يا منونة.. ركزي 😉💜");
+            }
+        }
+
+        function setupScroll() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.msg-card').forEach(card => observer.observe(card));
+        }
+
+        function startFinalSurprise() {
+            document.getElementById('bgMusic').pause();
+            document.getElementById('heartMusic').play();
+            document.getElementById('final-msg').style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        function initFallingItems() {
+            const items = ['💜', '✨', '⭐', '☁️', '🔮'];
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.className = 'falling';
+                el.innerHTML = items[Math.floor(Math.random() * items.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.fontSize = Math.random() * 20 + 15 + 'px';
+                el.style.animationDuration = Math.random() * 3 + 4 + 's';
+                el.style.opacity = Math.random();
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 6000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
+
